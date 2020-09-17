@@ -1,0 +1,1625 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{C1M1\_Assignment}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{chest-x-ray-medical-diagnosis-with-deep-learning}{%
+\section{Chest X-Ray Medical Diagnosis with Deep
+Learning}\label{chest-x-ray-medical-diagnosis-with-deep-learning}}
+
+    \textbf{Welcome to the first assignment of course 1!}
+
+In this assignment! You will explore medical image diagnosis by building
+a state-of-the-art chest X-ray classifier using Keras.
+
+The assignment will walk through some of the steps of building and
+evaluating this deep learning classifier model. In particular, you will:
+- Pre-process and prepare a real-world X-ray dataset - Use transfer
+learning to retrain a DenseNet model for X-ray image classification -
+Learn a technique to handle class imbalance - Measure diagnostic
+performance by computing the AUC (Area Under the Curve) for the ROC
+(Receiver Operating Characteristic) curve - Visualize model activity
+using GradCAMs
+
+In completing this assignment you will learn about the following topics:
+
+\begin{itemize}
+\tightlist
+\item
+  Data preparation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Visualizing data
+  \item
+    Preventing data leakage
+  \end{itemize}
+\item
+  Model Development
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Addressing class imbalance
+  \item
+    Leveraging pre-trained models using transfer learning
+  \end{itemize}
+\item
+  Evaluation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    AUC and ROC curves
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{outline}{%
+\subsection{Outline}\label{outline}}
+
+Use these links to jump to specific sections of this assignment!
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{1}
+\item
+  Section \ref{2}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{2-1}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Section \ref{ex-1}
+    \end{itemize}
+  \item
+    Section \ref{2-2}
+  \end{itemize}
+\item
+  Section \ref{3}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{3-1}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Section \ref{ex-2}
+    \item
+      Section \ref{ex-3}
+    \end{itemize}
+  \item
+    Section \ref{3-3}
+  \end{itemize}
+\item
+  Section \ref{4}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{4-1}
+  \end{itemize}
+\item
+  Section \ref{5}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{5-1}
+  \item
+    Section \ref{5-2}
+  \end{itemize}
+\end{itemize}
+
+     \#\# 1. Import Packages and Functions¶
+
+We'll make use of the following packages: - \texttt{numpy} and
+\texttt{pandas} is what we'll use to manipulate our data -
+\texttt{matplotlib.pyplot} and \texttt{seaborn} will be used to produce
+plots for visualization - \texttt{util} will provide the locally defined
+utility functions that have been provided for this assignment
+
+We will also use several modules from the \texttt{keras} framework for
+building deep learning models.
+
+Run the next cell to import all the necessary packages.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{import} \PY{n}{ImageDataGenerator}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{applications}\PY{n+nn}{.}\PY{n+nn}{densenet} \PY{k}{import} \PY{n}{DenseNet121}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{GlobalAveragePooling2D}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Model}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+        
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{load\PYZus{}model}
+        
+        \PY{k+kn}{import} \PY{n+nn}{util}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+     \#\# 2 Load the Datasets
+
+For this assignment, we will be using the
+\href{https://arxiv.org/abs/1705.02315}{ChestX-ray8 dataset} which
+contains 108,948 frontal-view X-ray images of 32,717 unique patients. -
+Each image in the data set contains multiple text-mined labels
+identifying 14 different pathological conditions. - These in turn can be
+used by physicians to diagnose 8 different diseases. - We will use this
+data to develop a single model that will provide binary classification
+predictions for each of the 14 labeled pathologies. - In other words it
+will predict `positive' or `negative' for each of the pathologies.
+
+You can download the entire dataset for free
+\href{https://nihcc.app.box.com/v/ChestXray-NIHCC}{here}. - We have
+provided a \textasciitilde{}1000 image subset of the images for you. -
+These can be accessed in the folder path stored in the
+\texttt{IMAGE\_DIR} variable.
+
+The dataset includes a CSV file that provides the labels for each X-ray.
+
+To make your job a bit easier, we have processed the labels for our
+small sample and generated three new files to get you started. These
+three files are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{nih/train-small.csv}: 875 images from our dataset to be used
+  for training.
+\item
+  \texttt{nih/valid-small.csv}: 109 images from our dataset to be used
+  for validation.
+\item
+  \texttt{nih/test.csv}: 420 images from our dataset to be used for
+  testing.
+\end{enumerate}
+
+This dataset has been annotated by consensus among four different
+radiologists for 5 of our 14 pathologies: - \texttt{Consolidation} -
+\texttt{Edema} - \texttt{Effusion} - \texttt{Cardiomegaly} -
+\texttt{Atelectasis}
+
+    \hypertarget{sidebar-on-meaning-of-class}{%
+\paragraph{Sidebar on meaning of
+`class'}\label{sidebar-on-meaning-of-class}}
+
+It is worth noting that the word \textbf{`class'} is used in multiple
+ways is these discussions. - We sometimes refer to each of the 14
+pathological conditions that are labeled in our dataset as a class. -
+But for each of those pathologies we are attempting to predict whether a
+certain condition is present (i.e.~positive result) or absent
+(i.e.~negative result). - These two possible labels of `positive' or
+`negative' (or the numerical equivalent of 1 or 0) are also typically
+referred to as classes. - Moreover, we also use the term in reference to
+software code `classes' such as \texttt{ImageDataGenerator}.
+
+As long as you are aware of all this though, it should not cause you any
+confusion as the term `class' is usually clear from the context in which
+it is used.
+
+    \hypertarget{read-in-the-data}{%
+\paragraph{Read in the data}\label{read-in-the-data}}
+
+Let's open these files using the
+\href{https://pandas.pydata.org/}{pandas} library
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nih/train\PYZhy{}small.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{valid\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nih/valid\PYZhy{}small.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{test\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nih/test.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}               Image  Atelectasis  Cardiomegaly  Consolidation  Edema  \textbackslash{}
+        0  00008270\_015.png            0             0              0      0   
+        1  00029855\_001.png            1             0              0      0   
+        2  00001297\_000.png            0             0              0      0   
+        3  00012359\_002.png            0             0              0      0   
+        4  00017951\_001.png            0             0              0      0   
+        
+           Effusion  Emphysema  Fibrosis  Hernia  Infiltration  Mass  Nodule  \textbackslash{}
+        0         0          0         0       0             0     0       0   
+        1         1          0         0       0             1     0       0   
+        2         0          0         0       0             0     0       0   
+        3         0          0         0       0             0     0       0   
+        4         0          0         0       0             1     0       0   
+        
+           PatientId  Pleural\_Thickening  Pneumonia  Pneumothorax  
+        0       8270                   0          0             0  
+        1      29855                   0          0             0  
+        2       1297                   1          0             0  
+        3      12359                   0          0             0  
+        4      17951                   0          0             0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cardiomegaly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Emphysema}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Effusion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hernia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Infiltration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nodule}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Atelectasis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pneumothorax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pleural\PYZus{}Thickening}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pneumonia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fibrosis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Edema}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Consolidation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+     \#\#\# 2.1 Preventing Data Leakage It is worth noting that our dataset
+contains multiple images for each patient. This could be the case, for
+example, when a patient has taken multiple X-ray images at different
+times during their hospital visits. In our data splitting, we have
+ensured that the split is done on the patient level so that there is no
+data ``leakage'' between the train, validation, and test datasets.
+
+     \#\#\# Exercise 1 - Checking Data Leakage In the cell below, write a
+function to check whether there is leakage between two datasets. We'll
+use this to make sure there are no patients in the test set that are
+also present in either the train or validation sets.
+
+     Hints
+
+Make use of python's set.intersection() function.
+
+In order to match the automatic grader's expectations, please start the
+line of code with df1\_patients\_unique\ldots{}{[}continue your code
+here{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} UNQ\PYZus{}C1 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)}
+        \PY{k}{def} \PY{n+nf}{check\PYZus{}for\PYZus{}leakage}\PY{p}{(}\PY{n}{df1}\PY{p}{,} \PY{n}{df2}\PY{p}{,} \PY{n}{patient\PYZus{}col}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Return True if there any patients are in both df1 and df2.}
+        
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{        df1 (dataframe): dataframe describing first dataset}
+        \PY{l+s+sd}{        df2 (dataframe): dataframe describing second dataset}
+        \PY{l+s+sd}{        patient\PYZus{}col (str): string name of column with patient IDs}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        leakage (bool): True if there is leakage, otherwise False}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+            
+            \PY{n}{df1\PYZus{}patients\PYZus{}unique} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df1}\PY{p}{[}\PY{n}{patient\PYZus{}col}\PY{p}{]}\PY{p}{)}
+            \PY{n}{df2\PYZus{}patients\PYZus{}unique} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df2}\PY{p}{[}\PY{n}{patient\PYZus{}col}\PY{p}{]}\PY{p}{)}
+            
+            \PY{n}{patients\PYZus{}in\PYZus{}both\PYZus{}groups} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{df1\PYZus{}patients\PYZus{}unique}\PY{o}{.}\PY{n}{intersection}\PY{p}{(}\PY{n}{df2\PYZus{}patients\PYZus{}unique}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} leakage contains true if there is patient overlap, otherwise false.}
+            \PY{n}{leakage} \PY{o}{=} \PY{k+kc}{True} \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{patients\PYZus{}in\PYZus{}both\PYZus{}groups}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{1} \PY{k}{else} \PY{k+kc}{False} \PY{c+c1}{\PYZsh{} boolean (true if there is at least 1 patient in both groups)}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+            
+            \PY{k}{return} \PY{n}{leakage}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} test}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test case 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patient\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patient\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df2}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{leakage output: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{check\PYZus{}for\PYZus{}leakage(df1, df2, }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{patient\PYZus{}id}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test case 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patient\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patient\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df1:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df2:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df2}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{leakage output: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{check\PYZus{}for\PYZus{}leakage(df1, df2, }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{patient\PYZus{}id}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+test case 1
+df1
+   patient\_id
+0           0
+1           1
+2           2
+df2
+   patient\_id
+0           2
+1           3
+2           4
+leakage output: True
+-------------------------------------
+test case 2
+df1:
+   patient\_id
+0           0
+1           1
+2           2
+df2:
+   patient\_id
+0           3
+1           4
+2           5
+leakage output: False
+
+    \end{Verbatim}
+
+    \hypertarget{expected-output}{%
+\subparagraph{Expected output}\label{expected-output}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test case }\DecValTok{1}
+\NormalTok{df1}
+\NormalTok{   patient_id}
+\DecValTok{0}           \DecValTok{0}
+\DecValTok{1}           \DecValTok{1}
+\DecValTok{2}           \DecValTok{2}
+\NormalTok{df2}
+\NormalTok{   patient_id}
+\DecValTok{0}           \DecValTok{2}
+\DecValTok{1}           \DecValTok{3}
+\DecValTok{2}           \DecValTok{4}
+\NormalTok{leakage output: }\VariableTok{True}
+\OperatorTok{-------------------------------------}
+\NormalTok{test case }\DecValTok{2}
+\NormalTok{df1:}
+\NormalTok{   patient_id}
+\DecValTok{0}           \DecValTok{0}
+\DecValTok{1}           \DecValTok{1}
+\DecValTok{2}           \DecValTok{2}
+\NormalTok{df2:}
+\NormalTok{   patient_id}
+\DecValTok{0}           \DecValTok{3}
+\DecValTok{1}           \DecValTok{4}
+\DecValTok{2}           \DecValTok{5}
+\NormalTok{leakage output: }\VariableTok{False}
+\end{Highlighting}
+\end{Shaded}
+
+    Run the next cell to check if there are patients in both train and test
+or in both valid and test.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{leakage between train and test: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{check\PYZus{}for\PYZus{}leakage}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{,} \PY{n}{test\PYZus{}df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{leakage between valid and test: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{check\PYZus{}for\PYZus{}leakage}\PY{p}{(}\PY{n}{valid\PYZus{}df}\PY{p}{,} \PY{n}{test\PYZus{}df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+leakage between train and test: False
+leakage between valid and test: False
+
+    \end{Verbatim}
+
+    If we get \texttt{False} for both, then we're ready to start preparing
+the datasets for training. Remember to always check for data leakage!
+
+     \#\#\# 2.2 Preparing Images
+
+    With our dataset splits ready, we can now proceed with setting up our
+model to consume them. - For this we will use the off-the-shelf
+\href{https://keras.io/preprocessing/image/}{ImageDataGenerator} class
+from the Keras framework, which allows us to build a ``generator'' for
+images specified in a dataframe. - This class also provides support for
+basic data augmentation such as random horizontal flipping of images. -
+We also use the generator to transform the values in each batch so that
+their mean is \(0\) and their standard deviation is 1. - This will
+facilitate model training by standardizing the input distribution. - The
+generator also converts our single channel X-ray images (gray-scale) to
+a three-channel format by repeating the values in the image across all
+channels. - We will want this because the pre-trained model that we'll
+use requires three-channel inputs.
+
+Since it is mainly a matter of reading and understanding Keras
+documentation, we have implemented the generator for you. There are a
+few things to note: 1. We normalize the mean and standard deviation of
+the data 3. We shuffle the input after each epoch. 4. We set the image
+size to be 320px by 320px
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}train\PYZus{}generator}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{image\PYZus{}dir}\PY{p}{,} \PY{n}{x\PYZus{}col}\PY{p}{,} \PY{n}{y\PYZus{}cols}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{target\PYZus{}w} \PY{o}{=} \PY{l+m+mi}{320}\PY{p}{,} \PY{n}{target\PYZus{}h} \PY{o}{=} \PY{l+m+mi}{320}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Return generator for training set, normalizing using batch}
+        \PY{l+s+sd}{    statistics.}
+        
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{      train\PYZus{}df (dataframe): dataframe specifying training data.}
+        \PY{l+s+sd}{      image\PYZus{}dir (str): directory where image files are held.}
+        \PY{l+s+sd}{      x\PYZus{}col (str): name of column in df that holds filenames.}
+        \PY{l+s+sd}{      y\PYZus{}cols (list): list of strings that hold y labels for images.}
+        \PY{l+s+sd}{      batch\PYZus{}size (int): images per batch to be fed into model during training.}
+        \PY{l+s+sd}{      seed (int): random seed.}
+        \PY{l+s+sd}{      target\PYZus{}w (int): final width of input images.}
+        \PY{l+s+sd}{      target\PYZus{}h (int): final height of input images.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        train\PYZus{}generator (DataFrameIterator): iterator over training set}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}        
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{getting train generator...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+            \PY{c+c1}{\PYZsh{} normalize images}
+            \PY{n}{image\PYZus{}generator} \PY{o}{=} \PY{n}{ImageDataGenerator}\PY{p}{(}
+                \PY{n}{samplewise\PYZus{}center}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                \PY{n}{samplewise\PYZus{}std\PYZus{}normalization}\PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} flow from directory with specified batch size}
+            \PY{c+c1}{\PYZsh{} and target image size}
+            \PY{n}{generator} \PY{o}{=} \PY{n}{image\PYZus{}generator}\PY{o}{.}\PY{n}{flow\PYZus{}from\PYZus{}dataframe}\PY{p}{(}
+                    \PY{n}{dataframe}\PY{o}{=}\PY{n}{df}\PY{p}{,}
+                    \PY{n}{directory}\PY{o}{=}\PY{n}{image\PYZus{}dir}\PY{p}{,}
+                    \PY{n}{x\PYZus{}col}\PY{o}{=}\PY{n}{x\PYZus{}col}\PY{p}{,}
+                    \PY{n}{y\PYZus{}col}\PY{o}{=}\PY{n}{y\PYZus{}cols}\PY{p}{,}
+                    \PY{n}{class\PYZus{}mode}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{raw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                    \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                    \PY{n}{shuffle}\PY{o}{=}\PY{n}{shuffle}\PY{p}{,}
+                    \PY{n}{seed}\PY{o}{=}\PY{n}{seed}\PY{p}{,}
+                    \PY{n}{target\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{n}{target\PYZus{}w}\PY{p}{,}\PY{n}{target\PYZus{}h}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{generator}
+\end{Verbatim}
+
+
+    \hypertarget{build-a-separate-generator-for-valid-and-test-sets}{%
+\paragraph{Build a separate generator for valid and test
+sets}\label{build-a-separate-generator-for-valid-and-test-sets}}
+
+Now we need to build a new generator for validation and testing data.
+
+\textbf{Why can't we use the same generator as for the training data?}
+
+Look back at the generator we wrote for the training data. - It
+normalizes each image \textbf{per batch}, meaning that it uses batch
+statistics. - We should not do this with the test and validation data,
+since in a real life scenario we don't process incoming images a batch
+at a time (we process one image at a time). - Knowing the average per
+batch of test data would effectively give our model an advantage.\\
+- The model should not have any information about the test data.
+
+What we need to do is normalize incoming test data using the statistics
+\textbf{computed from the training set}. * We implement this in the
+function below. * There is one technical note. Ideally, we would want to
+compute our sample mean and standard deviation using the entire training
+set. * However, since this is extremely large, that would be very time
+consuming. * In the interest of time, we'll take a random sample of the
+dataset and calcualte the sample mean and sample standard deviation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}test\PYZus{}and\PYZus{}valid\PYZus{}generator}\PY{p}{(}\PY{n}{valid\PYZus{}df}\PY{p}{,} \PY{n}{test\PYZus{}df}\PY{p}{,} \PY{n}{train\PYZus{}df}\PY{p}{,} \PY{n}{image\PYZus{}dir}\PY{p}{,} \PY{n}{x\PYZus{}col}\PY{p}{,} \PY{n}{y\PYZus{}cols}\PY{p}{,} \PY{n}{sample\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{target\PYZus{}w} \PY{o}{=} \PY{l+m+mi}{320}\PY{p}{,} \PY{n}{target\PYZus{}h} \PY{o}{=} \PY{l+m+mi}{320}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Return generator for validation set and test test set using }
+        \PY{l+s+sd}{    normalization statistics from training set.}
+        
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{      valid\PYZus{}df (dataframe): dataframe specifying validation data.}
+        \PY{l+s+sd}{      test\PYZus{}df (dataframe): dataframe specifying test data.}
+        \PY{l+s+sd}{      train\PYZus{}df (dataframe): dataframe specifying training data.}
+        \PY{l+s+sd}{      image\PYZus{}dir (str): directory where image files are held.}
+        \PY{l+s+sd}{      x\PYZus{}col (str): name of column in df that holds filenames.}
+        \PY{l+s+sd}{      y\PYZus{}cols (list): list of strings that hold y labels for images.}
+        \PY{l+s+sd}{      sample\PYZus{}size (int): size of sample to use for normalization statistics.}
+        \PY{l+s+sd}{      batch\PYZus{}size (int): images per batch to be fed into model during training.}
+        \PY{l+s+sd}{      seed (int): random seed.}
+        \PY{l+s+sd}{      target\PYZus{}w (int): final width of input images.}
+        \PY{l+s+sd}{      target\PYZus{}h (int): final height of input images.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        test\PYZus{}generator (DataFrameIterator) and valid\PYZus{}generator: iterators over test set and validation set respectively}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{getting train and valid generators...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} get generator to sample dataset}
+            \PY{n}{raw\PYZus{}train\PYZus{}generator} \PY{o}{=} \PY{n}{ImageDataGenerator}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{flow\PYZus{}from\PYZus{}dataframe}\PY{p}{(}
+                \PY{n}{dataframe}\PY{o}{=}\PY{n}{train\PYZus{}df}\PY{p}{,} 
+                \PY{n}{directory}\PY{o}{=}\PY{n}{IMAGE\PYZus{}DIR}\PY{p}{,} 
+                \PY{n}{x\PYZus{}col}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                \PY{n}{y\PYZus{}col}\PY{o}{=}\PY{n}{labels}\PY{p}{,} 
+                \PY{n}{class\PYZus{}mode}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{raw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{sample\PYZus{}size}\PY{p}{,} 
+                \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                \PY{n}{target\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{n}{target\PYZus{}w}\PY{p}{,} \PY{n}{target\PYZus{}h}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} get data sample}
+            \PY{n}{batch} \PY{o}{=} \PY{n}{raw\PYZus{}train\PYZus{}generator}\PY{o}{.}\PY{n}{next}\PY{p}{(}\PY{p}{)}
+            \PY{n}{data\PYZus{}sample} \PY{o}{=} \PY{n}{batch}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} use sample to fit mean and std for test set generator}
+            \PY{n}{image\PYZus{}generator} \PY{o}{=} \PY{n}{ImageDataGenerator}\PY{p}{(}
+                \PY{n}{featurewise\PYZus{}center}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                \PY{n}{featurewise\PYZus{}std\PYZus{}normalization}\PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} fit generator to sample from training data}
+            \PY{n}{image\PYZus{}generator}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data\PYZus{}sample}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} get test generator}
+            \PY{n}{valid\PYZus{}generator} \PY{o}{=} \PY{n}{image\PYZus{}generator}\PY{o}{.}\PY{n}{flow\PYZus{}from\PYZus{}dataframe}\PY{p}{(}
+                    \PY{n}{dataframe}\PY{o}{=}\PY{n}{valid\PYZus{}df}\PY{p}{,}
+                    \PY{n}{directory}\PY{o}{=}\PY{n}{image\PYZus{}dir}\PY{p}{,}
+                    \PY{n}{x\PYZus{}col}\PY{o}{=}\PY{n}{x\PYZus{}col}\PY{p}{,}
+                    \PY{n}{y\PYZus{}col}\PY{o}{=}\PY{n}{y\PYZus{}cols}\PY{p}{,}
+                    \PY{n}{class\PYZus{}mode}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{raw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                    \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                    \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                    \PY{n}{seed}\PY{o}{=}\PY{n}{seed}\PY{p}{,}
+                    \PY{n}{target\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{n}{target\PYZus{}w}\PY{p}{,}\PY{n}{target\PYZus{}h}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{test\PYZus{}generator} \PY{o}{=} \PY{n}{image\PYZus{}generator}\PY{o}{.}\PY{n}{flow\PYZus{}from\PYZus{}dataframe}\PY{p}{(}
+                    \PY{n}{dataframe}\PY{o}{=}\PY{n}{test\PYZus{}df}\PY{p}{,}
+                    \PY{n}{directory}\PY{o}{=}\PY{n}{image\PYZus{}dir}\PY{p}{,}
+                    \PY{n}{x\PYZus{}col}\PY{o}{=}\PY{n}{x\PYZus{}col}\PY{p}{,}
+                    \PY{n}{y\PYZus{}col}\PY{o}{=}\PY{n}{y\PYZus{}cols}\PY{p}{,}
+                    \PY{n}{class\PYZus{}mode}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{raw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                    \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                    \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                    \PY{n}{seed}\PY{o}{=}\PY{n}{seed}\PY{p}{,}
+                    \PY{n}{target\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{n}{target\PYZus{}w}\PY{p}{,}\PY{n}{target\PYZus{}h}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{valid\PYZus{}generator}\PY{p}{,} \PY{n}{test\PYZus{}generator}
+\end{Verbatim}
+
+
+    With our generator function ready, let's make one generator for our
+training data and one each of our test and validation datasets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{IMAGE\PYZus{}DIR} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nih/images\PYZhy{}small/}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{train\PYZus{}generator} \PY{o}{=} \PY{n}{get\PYZus{}train\PYZus{}generator}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{,} \PY{n}{IMAGE\PYZus{}DIR}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+         \PY{n}{valid\PYZus{}generator}\PY{p}{,} \PY{n}{test\PYZus{}generator}\PY{o}{=} \PY{n}{get\PYZus{}test\PYZus{}and\PYZus{}valid\PYZus{}generator}\PY{p}{(}\PY{n}{valid\PYZus{}df}\PY{p}{,} \PY{n}{test\PYZus{}df}\PY{p}{,} \PY{n}{train\PYZus{}df}\PY{p}{,} \PY{n}{IMAGE\PYZus{}DIR}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+getting train generator{\ldots}
+Found 1000 validated image filenames.
+getting train and valid generators{\ldots}
+Found 1000 validated image filenames.
+Found 200 validated image filenames.
+Found 420 validated image filenames.
+
+    \end{Verbatim}
+
+    Let's peek into what the generator gives our model during training and
+validation. We can do this by calling the
+\texttt{\_\_get\_item\_\_(index)} function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{train\PYZus{}generator}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}getitem\PYZus{}\PYZus{}}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     \#\# 3 Model Development
+
+Now we'll move on to model training and development. We have a few
+practical challenges to deal with before actually training a neural
+network, though. The first is class imbalance.
+
+     \#\#\# 3.1 Addressing Class Imbalance One of the challenges with
+working with medical diagnostic datasets is the large class imbalance
+present in such datasets. Let's plot the frequency of each of the labels
+in our dataset:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{labels}\PY{p}{,} \PY{n}{height}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{train\PYZus{}generator}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frequency of Each Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see from this plot that the prevalance of positive cases varies
+significantly across the different pathologies. (These trends mirror the
+ones in the full dataset as well.) * The \texttt{Hernia} pathology has
+the greatest imbalance with the proportion of positive training cases
+being about 0.2\%. * But even the \texttt{Infiltration} pathology, which
+has the least amount of imbalance, has only 17.5\% of the training cases
+labelled positive.
+
+Ideally, we would train our model using an evenly balanced dataset so
+that the positive and negative training cases would contribute equally
+to the loss.
+
+If we use a normal cross-entropy loss function with a highly unbalanced
+dataset, as we are seeing here, then the algorithm will be incentivized
+to prioritize the majority class (i.e negative in our case), since it
+contributes more to the loss.
+
+    \hypertarget{impact-of-class-imbalance-on-loss-function}{%
+\paragraph{Impact of class imbalance on loss
+function}\label{impact-of-class-imbalance-on-loss-function}}
+
+Let's take a closer look at this. Assume we would have used a normal
+cross-entropy loss for each pathology. We recall that the cross-entropy
+loss contribution from the \(i^{th}\) training data case is:
+
+\[\mathcal{L}_{cross-entropy}(x_i) = -(y_i \log(f(x_i)) + (1-y_i) \log(1-f(x_i))),\]
+
+where \(x_i\) and \(y_i\) are the input features and the label, and
+\(f(x_i)\) is the output of the model, i.e.~the probability that it is
+positive.
+
+Note that for any training case, either \(y_i=0\) or else \((1-y_i)=0\),
+so only one of these terms contributes to the loss (the other term is
+multiplied by zero, and becomes zero).
+
+We can rewrite the overall average cross-entropy loss over the entire
+training set \(\mathcal{D}\) of size \(N\) as follows:
+
+\[\mathcal{L}_{cross-entropy}(\mathcal{D}) = - \frac{1}{N}\big( \sum_{\text{positive examples}} \log (f(x_i)) + \sum_{\text{negative examples}} \log(1-f(x_i)) \big).\]
+
+Using this formulation, we can see that if there is a large imbalance
+with very few positive training cases, for example, then the loss will
+be dominated by the negative class. Summing the contribution over all
+the training cases for each class (i.e.~pathological condition), we see
+that the contribution of each class (i.e.~positive or negative) is:
+
+\[freq_{p} = \frac{\text{number of positive examples}}{N} \]
+
+\[\text{and}\]
+
+\[freq_{n} = \frac{\text{number of negative examples}}{N}.\]
+
+     \#\#\# Exercise 2 - Computing Class Frequencies Complete the function
+below to calculate these frequences for each label in our dataset.
+
+     Hints
+
+Use numpy.sum(a, axis=), and choose the axis (0 or 1)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} UNQ\PYZus{}C2 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)}
+         \PY{k}{def} \PY{n+nf}{compute\PYZus{}class\PYZus{}freqs}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Compute positive and negative frequences for each class.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        labels (np.array): matrix of labels, size (num\PYZus{}examples, num\PYZus{}classes)}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        positive\PYZus{}frequencies (np.array): array of positive frequences for each}
+         \PY{l+s+sd}{                                         class, size (num\PYZus{}classes)}
+         \PY{l+s+sd}{        negative\PYZus{}frequencies (np.array): array of negative frequences for each}
+         \PY{l+s+sd}{                                         class, size (num\PYZus{}classes)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} total number of patients (rows)}
+             \PY{n}{N} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{n}{positive\PYZus{}frequencies} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{labels}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{/}\PY{n}{N}
+             \PY{n}{negative\PYZus{}frequencies} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{labels}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{/}\PY{n}{N}
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{k}{return} \PY{n}{positive\PYZus{}frequencies}\PY{p}{,} \PY{n}{negative\PYZus{}frequencies}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Test}
+         \PY{n}{labels\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}
+             \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+         \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{labels:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{labels\PYZus{}matrix}\PY{p}{)}
+         
+         \PY{n}{test\PYZus{}pos\PYZus{}freqs}\PY{p}{,} \PY{n}{test\PYZus{}neg\PYZus{}freqs} \PY{o}{=} \PY{n}{compute\PYZus{}class\PYZus{}freqs}\PY{p}{(}\PY{n}{labels\PYZus{}matrix}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pos freqs: }\PY{l+s+si}{\PYZob{}test\PYZus{}pos\PYZus{}freqs\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neg freqs: }\PY{l+s+si}{\PYZob{}test\PYZus{}neg\PYZus{}freqs\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+labels:
+[[1 0 0]
+ [0 1 1]
+ [1 0 1]
+ [1 1 1]
+ [1 0 1]]
+pos freqs: [0.8 0.4 0.8]
+neg freqs: [0.2 0.6 0.2]
+
+    \end{Verbatim}
+
+    \hypertarget{expected-output}{%
+\subparagraph{Expected output}\label{expected-output}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{labels:}
+\NormalTok{[[}\DecValTok{1} \DecValTok{0} \DecValTok{0}\NormalTok{]}
+\NormalTok{ [}\DecValTok{0} \DecValTok{1} \DecValTok{1}\NormalTok{]}
+\NormalTok{ [}\DecValTok{1} \DecValTok{0} \DecValTok{1}\NormalTok{]}
+\NormalTok{ [}\DecValTok{1} \DecValTok{1} \DecValTok{1}\NormalTok{]}
+\NormalTok{ [}\DecValTok{1} \DecValTok{0} \DecValTok{1}\NormalTok{]]}
+\NormalTok{pos freqs: [}\FloatTok{0.8} \FloatTok{0.4} \FloatTok{0.8}\NormalTok{]}
+\NormalTok{neg freqs: [}\FloatTok{0.2} \FloatTok{0.6} \FloatTok{0.2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+    Now we'll compute frequencies for our training data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{freq\PYZus{}pos}\PY{p}{,} \PY{n}{freq\PYZus{}neg} \PY{o}{=} \PY{n}{compute\PYZus{}class\PYZus{}freqs}\PY{p}{(}\PY{n}{train\PYZus{}generator}\PY{o}{.}\PY{n}{labels}\PY{p}{)}
+         \PY{n}{freq\PYZus{}pos}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} array([0.02 , 0.013, 0.128, 0.002, 0.175, 0.045, 0.054, 0.106, 0.038,
+                0.021, 0.01 , 0.014, 0.016, 0.033])
+\end{Verbatim}
+            
+    Let's visualize these two contribution ratios next to each other for
+each of the pathologies:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{labels}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Positive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{freq\PYZus{}pos}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{labels}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Negative}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{v}\PY{p}{\PYZcb{}} \PY{k}{for} \PY{n}{l}\PY{p}{,}\PY{n}{v} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{freq\PYZus{}neg}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{f} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Label}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we see in the above plot, the contributions of positive cases is
+significantly lower than that of the negative ones. However, we want the
+contributions to be equal. One way of doing this is by multiplying each
+example from each class by a class-specific weight factor, \(w_{pos}\)
+and \(w_{neg}\), so that the overall contribution of each class is the
+same.
+
+To have this, we want
+
+\[w_{pos} \times freq_{p} = w_{neg} \times freq_{n},\]
+
+which we can do simply by taking
+
+\[w_{pos} = freq_{neg}\] \[w_{neg} = freq_{pos}\]
+
+This way, we will be balancing the contribution of positive and negative
+labels.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{pos\PYZus{}weights} \PY{o}{=} \PY{n}{freq\PYZus{}neg}
+         \PY{n}{neg\PYZus{}weights} \PY{o}{=} \PY{n}{freq\PYZus{}pos}
+         \PY{n}{pos\PYZus{}contribution} \PY{o}{=} \PY{n}{freq\PYZus{}pos} \PY{o}{*} \PY{n}{pos\PYZus{}weights} 
+         \PY{n}{neg\PYZus{}contribution} \PY{o}{=} \PY{n}{freq\PYZus{}neg} \PY{o}{*} \PY{n}{neg\PYZus{}weights}
+\end{Verbatim}
+
+
+    Let's verify this by graphing the two contributions next to each other
+again:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{labels}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Positive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{pos\PYZus{}contribution}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{labels}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Negative}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{v}\PY{p}{\PYZcb{}} 
+                                 \PY{k}{for} \PY{n}{l}\PY{p}{,}\PY{n}{v} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{neg\PYZus{}contribution}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Label}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As the above figure shows, by applying these weightings the positive and
+negative labels within each class would have the same aggregate
+contribution to the loss function. Now let's implement such a loss
+function.
+
+After computing the weights, our final weighted loss for each training
+case will be
+
+\[\mathcal{L}_{cross-entropy}^{w}(x) = - (w_{p} y \log(f(x)) + w_{n}(1-y) \log( 1 - f(x) ) ).\]
+
+     \#\#\# Exercise 3 - Weighted Loss Fill out the \texttt{weighted\_loss}
+function below to return a loss function that calculates the weighted
+loss for each batch. Recall that for the multi-class loss, we add up the
+average loss for each individual class. Note that we also want to add a
+small value, \(\epsilon\), to the predicted values before taking their
+logs. This is simply to avoid a numerical error that would otherwise
+occur if the predicted value happens to be zero.
+
+\hypertarget{note}{%
+\subparagraph{Note}\label{note}}
+
+Please use Keras functions to calculate the mean and the log.
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.tensorflow.org/api_docs/python/tf/keras/backend/mean}{Keras.mean}
+\item
+  \href{https://www.tensorflow.org/api_docs/python/tf/keras/backend/log}{Keras.log}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} UNQ\PYZus{}C3 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}weighted\PYZus{}loss}\PY{p}{(}\PY{n}{pos\PYZus{}weights}\PY{p}{,} \PY{n}{neg\PYZus{}weights}\PY{p}{,} \PY{n}{epsilon}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Return weighted loss function given negative weights and positive weights.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{      pos\PYZus{}weights (np.array): array of positive weights for each class, size (num\PYZus{}classes)}
+         \PY{l+s+sd}{      neg\PYZus{}weights (np.array): array of negative weights for each class, size (num\PYZus{}classes)}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{      weighted\PYZus{}loss (function): weighted loss function}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{def} \PY{n+nf}{weighted\PYZus{}loss}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Return weighted loss value. }
+         
+         \PY{l+s+sd}{        Args:}
+         \PY{l+s+sd}{            y\PYZus{}true (Tensor): Tensor of true labels, size is (num\PYZus{}examples, num\PYZus{}classes)}
+         \PY{l+s+sd}{            y\PYZus{}pred (Tensor): Tensor of predicted labels, size is (num\PYZus{}examples, num\PYZus{}classes)}
+         \PY{l+s+sd}{        Returns:}
+         \PY{l+s+sd}{            loss (Float): overall scalar loss summed across all classes}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{c+c1}{\PYZsh{} initialize loss to zero}
+                 \PY{n}{loss} \PY{o}{=} \PY{l+m+mf}{0.0}
+                 
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pos\PYZus{}weights}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} for each class, add average weighted loss for that class }
+                     \PY{n}{loss} \PY{o}{+}\PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{pos\PYZus{}weights}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*}\PY{n}{y\PYZus{}true}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{K}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{epsilon}\PY{p}{)}      
+                             \PY{o}{+} \PY{n}{neg\PYZus{}weights}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}true}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{K}\PY{o}{.}\PY{n}{log}\PY{p}{(} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{epsilon}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}complete this line}
+                 \PY{k}{return} \PY{n}{loss}
+             
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{k}{return} \PY{n}{weighted\PYZus{}loss}
+\end{Verbatim}
+
+
+    Now let's test our function with some simple cases.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Test}
+         \PY{n}{sess} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{get\PYZus{}session}\PY{p}{(}\PY{p}{)}
+         \PY{k}{with} \PY{n}{sess}\PY{o}{.}\PY{n}{as\PYZus{}default}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test example:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{y\PYZus{}true} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}
+                 \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                  \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                  \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                  \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+             \PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y\PYZus{}true:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{w\PYZus{}p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}
+             \PY{n}{w\PYZus{}n} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{w\PYZus{}p:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{w\PYZus{}p}\PY{p}{)}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{w\PYZus{}n:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{w\PYZus{}n}\PY{p}{)}
+         
+             \PY{n}{y\PYZus{}pred\PYZus{}1} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{y\PYZus{}pred\PYZus{}1:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}pred\PYZus{}1}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{y\PYZus{}pred\PYZus{}2} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{0.3}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{y\PYZus{}pred\PYZus{}2:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}pred\PYZus{}2}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} test with a large epsilon in order to catch errors}
+             \PY{n}{L} \PY{o}{=} \PY{n}{get\PYZus{}weighted\PYZus{}loss}\PY{p}{(}\PY{n}{w\PYZus{}p}\PY{p}{,} \PY{n}{w\PYZus{}n}\PY{p}{,} \PY{n}{epsilon}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{If we weighted them correctly, we expect the two losses to be the same.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{L1} \PY{o}{=} \PY{n}{L}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}1}\PY{p}{)}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}
+             \PY{n}{L2} \PY{o}{=} \PY{n}{L}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}2}\PY{p}{)}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{L(y\PYZus{}pred\PYZus{}1)= }\PY{l+s+si}{\PYZob{}L1:.4f\PYZcb{}}\PY{l+s+s2}{, L(y\PYZus{}pred\PYZus{}2)= }\PY{l+s+si}{\PYZob{}L2:.4f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Difference is L1 \PYZhy{} L2 = }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{L1 \PYZhy{} L2:.4f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test example:
+
+y\_true:
+
+[[1. 1. 1.]
+ [1. 1. 0.]
+ [0. 1. 0.]
+ [1. 0. 1.]]
+
+w\_p:
+
+[0.25 0.25 0.5 ]
+
+w\_n:
+
+[0.75 0.75 0.5 ]
+
+y\_pred\_1:
+
+[[0.7 0.7 0.7]
+ [0.7 0.7 0.7]
+ [0.7 0.7 0.7]
+ [0.7 0.7 0.7]]
+
+y\_pred\_2:
+
+[[0.3 0.3 0.3]
+ [0.3 0.3 0.3]
+ [0.3 0.3 0.3]
+ [0.3 0.3 0.3]]
+
+If we weighted them correctly, we expect the two losses to be the same.
+
+L(y\_pred\_1)= -0.4956, L(y\_pred\_2)= -0.4956
+Difference is L1 - L2 = 0.0000
+
+    \end{Verbatim}
+
+    \hypertarget{additional-check}{%
+\paragraph{Additional check}\label{additional-check}}
+
+If you implemented the function correctly, then if the epsilon for the
+\texttt{get\_weighted\_loss} is set to \texttt{1}, the weighted losses
+will be as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{L(y_pred_1)}\OperatorTok{=} \FloatTok{-0.4956}\NormalTok{, L(y_pred_2)}\OperatorTok{=} \FloatTok{-0.4956}
+\end{Highlighting}
+\end{Shaded}
+
+If you are missing something in your implementation, you will see a
+different set of losses for L1 and L2 (even though L1 and L2 will be the
+same).
+
+     \#\#\# 3.3 DenseNet121
+
+Next, we will use a pre-trained
+\href{https://www.kaggle.com/pytorch/densenet121}{DenseNet121} model
+which we can load directly from Keras and then add two layers on top of
+it: 1. A \texttt{GlobalAveragePooling2D} layer to get the average of the
+last convolution layers from DenseNet121. 2. A \texttt{Dense} layer with
+\texttt{sigmoid} activation to get the prediction logits for each of our
+classes.
+
+We can set our custom loss function for the model by specifying the
+\texttt{loss} parameter in the \texttt{compile()} function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} create the base pre\PYZhy{}trained model}
+         \PY{n}{base\PYZus{}model} \PY{o}{=} \PY{n}{DenseNet121}\PY{p}{(}\PY{n}{weights}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./nih/densenet.hdf5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{include\PYZus{}top}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{x} \PY{o}{=} \PY{n}{base\PYZus{}model}\PY{o}{.}\PY{n}{output}
+         
+         \PY{c+c1}{\PYZsh{} add a global spatial average pooling layer}
+         \PY{n}{x} \PY{o}{=} \PY{n}{GlobalAveragePooling2D}\PY{p}{(}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} and a logistic layer}
+         \PY{n}{predictions} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sigmoid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{inputs}\PY{o}{=}\PY{n}{base\PYZus{}model}\PY{o}{.}\PY{n}{input}\PY{p}{,} \PY{n}{outputs}\PY{o}{=}\PY{n}{predictions}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adam}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{n}{get\PYZus{}weighted\PYZus{}loss}\PY{p}{(}\PY{n}{pos\PYZus{}weights}\PY{p}{,} \PY{n}{neg\PYZus{}weights}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:From /opt/conda/lib/python3.6/site-packages/tensorflow\_core/python/ops/resource\_variable\_ops.py:1630: calling BaseResourceVariable.\_\_init\_\_ (from tensorflow.python.ops.resource\_variable\_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *\_constraint arguments to layers.
+WARNING:tensorflow:From /opt/conda/lib/python3.6/site-packages/keras/backend/tensorflow\_backend.py:4070: The name tf.nn.max\_pool is deprecated. Please use tf.nn.max\_pool2d instead.
+
+WARNING:tensorflow:From /opt/conda/lib/python3.6/site-packages/keras/backend/tensorflow\_backend.py:4074: The name tf.nn.avg\_pool is deprecated. Please use tf.nn.avg\_pool2d instead.
+
+
+    \end{Verbatim}
+
+     \#\# 4 Training {[}optional{]}
+
+With our model ready for training, we will use the \texttt{model.fit()}
+function in Keras to train our model. - We are training on a small
+subset of the dataset (\textasciitilde{}1\%).\\
+- So what we care about at this point is to make sure that the loss on
+the training set is decreasing.
+
+Since training can take a considerable time, for pedagogical purposes we
+have chosen not to train the model here but rather to load a set of
+pre-trained weights in the next section. However, you can use the code
+shown below to practice training the model locally on your machine or in
+Colab.
+
+\textbf{NOTE:} Do not run the code below on the Coursera platform as it
+will exceed the platform's memory limitations.
+
+Python Code for training the model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{history }\OperatorTok{=}\NormalTok{ model.fit_generator(train_generator, }
+\NormalTok{                              validation_data}\OperatorTok{=}\NormalTok{valid_generator,}
+\NormalTok{                              steps_per_epoch}\OperatorTok{=}\DecValTok{100}\NormalTok{, }
+\NormalTok{                              validation_steps}\OperatorTok{=}\DecValTok{25}\NormalTok{, }
+\NormalTok{                              epochs }\OperatorTok{=} \DecValTok{3}\NormalTok{)}
+
+\NormalTok{plt.plot(history.history[}\StringTok{'loss'}\NormalTok{])}
+\NormalTok{plt.ylabel(}\StringTok{"loss"}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{"epoch"}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Training Loss Curve"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+     \#\#\# 4.1 Training on the Larger Dataset
+
+Given that the original dataset is 40GB+ in size and the training
+process on the full dataset takes a few hours, we have trained the model
+on a GPU-equipped machine for you and provided the weights file from our
+model (with a batch size of 32 instead) to be used for the rest of this
+assignment.
+
+The model architecture for our pre-trained model is exactly the same,
+but we used a few useful Keras ``callbacks'' for this training. Do spend
+time to read about these callbacks at your leisure as they will be very
+useful for managing long-running training sessions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  You can use \texttt{ModelCheckpoint} callback to monitor your model's
+  \texttt{val\_loss} metric and keep a snapshot of your model at the
+  point.
+\item
+  You can use the \texttt{TensorBoard} to use the Tensorflow Tensorboard
+  utility to monitor your runs in real-time.
+\item
+  You can use the \texttt{ReduceLROnPlateau} to slowly decay the
+  learning rate for your model as it stops getting better on a metric
+  such as \texttt{val\_loss} to fine-tune the model in the final steps
+  of training.
+\item
+  You can use the \texttt{EarlyStopping} callback to stop the training
+  job when your model stops getting better in it's validation loss. You
+  can set a \texttt{patience} value which is the number of epochs the
+  model does not improve after which the training is terminated. This
+  callback can also conveniently restore the weights for the best metric
+  at the end of training to your model.
+\end{enumerate}
+
+You can read about these callbacks and other useful Keras callbacks
+\href{https://keras.io/callbacks/}{here}.
+
+Let's load our pre-trained weights into the model now:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./nih/pretrained\PYZus{}model.h5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+     \#\# 5 Prediction and Evaluation
+
+    Now that we have a model, let's evaluate it using our test set. We can
+conveniently use the \texttt{predict\_generator} function to generate
+the predictions for the images in our test set.
+
+\textbf{Note:} The following cell can take about 4 minutes to run.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{predicted\PYZus{}vals} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict\PYZus{}generator}\PY{p}{(}\PY{n}{test\PYZus{}generator}\PY{p}{,} \PY{n}{steps} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}generator}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:From /opt/conda/lib/python3.6/site-packages/keras/backend/tensorflow\_backend.py:422: The name tf.global\_variables is deprecated. Please use tf.compat.v1.global\_variables instead.
+
+
+    \end{Verbatim}
+
+     \#\#\# 5.1 ROC Curve and AUROC We'll cover topic of model evaluation in
+much more detail in later weeks, but for now we'll walk through
+computing a metric called the AUC (Area Under the Curve) from the ROC
+(\href{https://en.wikipedia.org/wiki/Receiver_operating_characteristic}{Receiver
+Operating Characteristic}) curve. This is also referred to as the AUROC
+value, but you will see all three terms in reference to the technique,
+and often used almost interchangeably.
+
+For now, what you need to know in order to interpret the plot is that a
+curve that is more to the left and the top has more ``area'' under it,
+and indicates that the model is performing better.
+
+We will use the \texttt{util.get\_roc\_curve()} function which has been
+provided for you in \texttt{util.py}. Look through this function and
+note the use of the \texttt{sklearn} library functions to generate the
+ROC curves and AUROC values for our model.
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html}{roc\_curve}
+\item
+  \href{https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html}{roc\_auc\_score}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{auc\PYZus{}rocs} \PY{o}{=} \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}roc\PYZus{}curve}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{n}{predicted\PYZus{}vals}\PY{p}{,} \PY{n}{test\PYZus{}generator}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    You can compare the performance to the AUCs reported in the original
+ChexNeXt paper in the table below:
+
+    For reference, here's the AUC figure from the ChexNeXt paper which
+includes AUC values for their model as well as radiologists on this
+dataset:
+
+This method does take advantage of a few other tricks such as
+self-training and ensembling as well, which can give a significant boost
+to the performance.
+
+    For details about the best performing methods and their performance on
+this dataset, we encourage you to read the following papers: -
+\href{https://arxiv.org/abs/1711.05225}{CheXNet} -
+\href{https://arxiv.org/pdf/1901.07031.pdf}{CheXpert} -
+\href{https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1002686}{ChexNeXt}
+
+     \#\#\# 5.2 Visualizing Learning with GradCAM
+
+    One of the challenges of using deep learning in medicine is that the
+complex architecture used for neural networks makes them much harder to
+interpret compared to traditional machine learning models (e.g.~linear
+models).
+
+One of the most common approaches aimed at increasing the
+interpretability of models for computer vision tasks is to use Class
+Activation Maps (CAM). - Class activation maps are useful for
+understanding where the model is ``looking'' when classifying an image.
+
+In this section we will use a
+\href{https://arxiv.org/abs/1610.02391}{GradCAM's} technique to produce
+a heatmap highlighting the important regions in the image for predicting
+the pathological condition. - This is done by extracting the gradients
+of each predicted class, flowing into our model's final convolutional
+layer. Look at the \texttt{util.compute\_gradcam} which has been
+provided for you in \texttt{util.py} to see how this is done with the
+Keras framework.
+
+It is worth mentioning that GradCAM does not provide a full explanation
+of the reasoning for each classification probability. - However, it is
+still a useful tool for ``debugging'' our model and augmenting our
+prediction so that an expert could validate that a prediction is indeed
+due to the model focusing on the right regions of the image.
+
+    First we will load the small training set and setup to look at the 4
+classes with the highest performing AUC measures.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nih/train\PYZhy{}small.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{IMAGE\PYZus{}DIR} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nih/images\PYZhy{}small/}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{} only show the labels with top 4 AUC}
+         \PY{n}{labels\PYZus{}to\PYZus{}show} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{take}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{auc\PYZus{}rocs}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+
+
+    Now let's look at a few specific images.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{util}\PY{o}{.}\PY{n}{compute\PYZus{}gradcam}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{00008270\PYZus{}015.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{IMAGE\PYZus{}DIR}\PY{p}{,} \PY{n}{df}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{labels\PYZus{}to\PYZus{}show}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loading original image
+Generating gradcam for class Cardiomegaly
+Generating gradcam for class Mass
+Generating gradcam for class Pneumothorax
+Generating gradcam for class Edema
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_70_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{util}\PY{o}{.}\PY{n}{compute\PYZus{}gradcam}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{00011355\PYZus{}002.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{IMAGE\PYZus{}DIR}\PY{p}{,} \PY{n}{df}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{labels\PYZus{}to\PYZus{}show}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loading original image
+Generating gradcam for class Cardiomegaly
+Generating gradcam for class Mass
+Generating gradcam for class Pneumothorax
+Generating gradcam for class Edema
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{util}\PY{o}{.}\PY{n}{compute\PYZus{}gradcam}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{00029855\PYZus{}001.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{IMAGE\PYZus{}DIR}\PY{p}{,} \PY{n}{df}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{labels\PYZus{}to\PYZus{}show}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loading original image
+Generating gradcam for class Cardiomegaly
+Generating gradcam for class Mass
+Generating gradcam for class Pneumothorax
+Generating gradcam for class Edema
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_72_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{util}\PY{o}{.}\PY{n}{compute\PYZus{}gradcam}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{00005410\PYZus{}000.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{IMAGE\PYZus{}DIR}\PY{p}{,} \PY{n}{df}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{labels\PYZus{}to\PYZus{}show}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loading original image
+Generating gradcam for class Cardiomegaly
+Generating gradcam for class Mass
+Generating gradcam for class Pneumothorax
+Generating gradcam for class Edema
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_73_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Congratulations, you've completed the first assignment of course one!
+You've learned how to preprocess data, check for data leakage, train a
+pre-trained model, and evaluate using the AUC. Great work!
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
